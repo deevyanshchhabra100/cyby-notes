@@ -8,12 +8,14 @@ These ports are used by widely used protocols and services. For example:
 Port 80 for HTTP (web traffic)
 Port 443 for HTTPS (secure web traffic)
 Port 22 for SSH (secure shell)
+
 Registered Ports (1024-49151):
 
 These ports are assigned for specific applications by software vendors. They are less commonly used than well-known ports but are still standardized for various services. For example:
 Port 3306 for MySQL database
 Port 5432 for PostgreSQL database
 Port 8080 for HTTP alternate (commonly used for web services and development)
+
 Dynamic or Private Ports (49152-65535):
 
 These ports are used for temporary or private connections, often assigned dynamically by applications. They are generally used for ephemeral ports in client-side connections or internal services. For example:
@@ -50,11 +52,13 @@ Ports in this range are often used for short-lived connections or client-side ap
 
 ----------------------------------------------------------------------------
 CHEK OUT IMAGE : 3WAYHS
+
+
 // there is also a pt when we send syn flag to ser b port that should be open to establish a connection
 
 TCP 3 WAY HS : USER A AND USER B
 1. SYN FLAG BY USER A TO B < TO INITIATE CONNECTION>
-2. USER B SEND SYN + ACK THAT RECIEVED USER A FLAG AND AGAIN IT SEND SIN AS B ALSO WANTS TO ESTABLISH CONNECTION WITH A
+2. USER B SEND SYN + ACK THAT RECIEVED USER A FLAG AND AGAIN IT SEND SYN AS B ALSO WANTS TO ESTABLISH CONNECTION WITH A
 3. THEN USER A AGAIN SEND ACK TO B THAT YES UR SYN + ACK IS REACHED TO ME
 
 -> this 3 step process is known as 3 way handshake
@@ -79,7 +83,45 @@ image reffer : ports image
 
 ----------------------------------------------------------------------------
 
-jio allotes us dynamic public ip to all our devices
+jio{isp} allotes us dynamic public ip to all our devices
+
+every isp has range of public ip and jio allocates ip to its user from the provided  range now ur broadband has a public ip i.e is given to it by jio now ur router provides a private ip to all the divices conencted to that router
+range of priivate ip 192.168.0.0 - 192.168.0.255 { it allocates to user } but first adress of that keep as it own private ip i.e 192.168.0.1
+for eg my jio router ip is 192.168.29.1  and my phone connected to it has ip 192.168.29.184
+
+dhcp(dynamic host configuration protocol) helps to allocate ip to all machine connected in wifi
+
+except this every device would hv mac address too
+
+dhcp mantains a table and which ip is allocated to which user { with help of mac address}
+
+dhcp with help of arp(adress resolution protocol) send a brooadcast packet to all connected users which has private ip of any particular connected device connected to that router along with router ip and as it is a broadcast packet it reached to all connected devices but only that devic responds who matched with the particular device ip the broadcast message carry and it responds with its mac adress and if no reply is generated means the particular user is disconnected and now dhcp updates its table.. arp repates this process in every milli seconds
+
+every device has private ip and mac adress for sure but third thing is local host (127.0.0.1)
+* private ip generally used in lan
+* public ip generally used in wan
+* local host is used with it system can be related with our man used for internal communication and it is not possible to interact with local host two devices can not interact using local host
+localhost is done to run internal testing with in machine
+
+we generally used local host while web dev to run as servers or programs like localhost:8080 
+
+-> Access phone localhost from another device (e.g., PC): To access the localhost of your phone from another device on the same Wi-Fi network:
+
+Find your phone's local IP address. You can find this under your phone’s Wi-Fi settings.
+
+On the other device (like a PC), open a browser and type:
+Copy code
+http://PHONE-IP:PORT
+Replace PHONE-IP with the local IP address of your phone and PORT with the port number your local server is running on.
+
+-> we hv done it when i created a web app on port 8080 and my phone and my laptop was on same wifi i accessed my webpage using my phone by using same local host technique
+
+-----------------------------------------------------------------------------------------------------
+
+-> our device has only private ip that is connected to wifi now suppose we want to connect to google.com which has a public ip and we know private ip and public ip can never communicate with each other so here router comes in play we send our packet(that has we want to connect to google.com) to our router as router and device both has private ip so communication happens and now router using its public ip connects with google public ip and packet recieve through googles public ip is send back to device using routers private ip .. so this is the flow how communication happen and how we access internet..
+
+----------------------------------------------------------------------------------------------------
+
 
 
 
